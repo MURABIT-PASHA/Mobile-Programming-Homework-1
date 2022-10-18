@@ -21,5 +21,4 @@ class CaesarCypher{
     }
     return encryptedWord;
   }
-
 }

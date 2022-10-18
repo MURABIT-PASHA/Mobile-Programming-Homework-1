@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:homework_1/caesar_cypher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// ButtonStyle
   ButtonStyle elevatedButtonStyle(Color colour) => ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(colour),
+        backgroundColor: MaterialStateProperty.all<Color>(colour),
         minimumSize: MaterialStateProperty.all<Size>(const Size(150, 40)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -109,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ElevatedButton(
-                    style: elevatedButtonStyle(blue1),
+                      style: elevatedButtonStyle(blue1),
                       onPressed: () {
                         if (userNumber == rng) {
                           showDialog(
@@ -188,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ElevatedButton(
-                    style: elevatedButtonStyle(blue2),
+                      style: elevatedButtonStyle(blue2),
                       onPressed: () {
                         List bin = binary.split("");
                         double sum = 0;
@@ -291,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ElevatedButton(
-                    style: elevatedButtonStyle(blue3),
+                      style: elevatedButtonStyle(blue3),
                       onPressed: () {
                         CaesarCypher caesarCypher =
                             CaesarCypher(text, cryptNum);
@@ -334,7 +335,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ElevatedButton(
-                    style: elevatedButtonStyle(blue4),
+                      style: elevatedButtonStyle(blue4),
                       onPressed: () {
                         Duration duration = Duration(hours: dateNum);
                         int dateHours = duration.inHours % 24;
@@ -354,10 +355,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+            Container(
+              height: 200,
+              child: ElevatedButton(
+                onPressed: (){_launchURL();},
+                child: Text("Sayfaya git"),
+              ),
+            )
           ],
         ),
       ),
     );
+  }
+
+  _launchURL() async {
+    Uri uri = Uri(
+        scheme:'https', path: 'murabit-akdogan.me');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $uri';
+    }
   }
 
   Widget alert(String title, String content) => AlertDialog(
